@@ -28,3 +28,6 @@ jobs:
 
       - name: Package
         run: ./mvnw -DskipTests package
+
+      - name: Build Docker image
+        run: docker build -t quarkus-portfolio:ci .
