@@ -1,66 +1,145 @@
-# Quarkus Portfolio
+# 🚀 Quarkus Portfolio – CI/CD & Containers
 
-[![CI](https://github.com/macalsr/quarkus-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/macalsr/quarkus-portfolio/actions/workflows/ci.yml)
+![CI](https://github.com/macalsr/quarkus-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/macalsr/quarkus-portfolio/actions/workflows/ci.yml)
 
-Projeto de estudo com Java 21, Quarkus e CI/CD.
+Projeto de portfólio para estudo e prática de **Java 21**, **Quarkus**, **CI/CD**, **Docker** e, futuramente, **Kubernetes**.  
+O foco é demonstrar **boas práticas de engenharia**, automação e pipeline próximo da realidade de mercado.
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+---
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+## 🧠 Objetivos do projeto
 
-## Running the application in dev mode
+- Construir uma API simples e bem testada
+- Implementar **CI completo** (build + testes)
+- Containerizar a aplicação com **Docker (multi-stage)**
+- Automatizar build de imagem no CI
+- Publicar imagem em registry
+- Evoluir para **deploy com Kubernetes**
 
-You can run your application in dev mode that enables live coding using:
+---
 
-```shell script
+## 🛠️ Tecnologias utilizadas
+
+- Java 21
+- Quarkus
+- Maven
+- JUnit / RestAssured
+- Docker
+- GitHub Actions
+- GitHub Container Registry (GHCR)
+
+---
+
+## 📐 Arquitetura (atual)
+
+- API REST simples
+- Endpoints stateless
+- Build com Maven
+- Container Docker com multi-stage build
+- Pipeline CI automatizado no GitHub Actions
+
+Fluxo atual:
+
+```
+Commit → GitHub Actions → Testes → Build → Docker Build
+```
+
+*(Deploy será adicionado na próxima fase com Kubernetes)*
+
+---
+
+## 🔗 Endpoints disponíveis
+
+| Método | Endpoint | Descrição |
+|------|--------|-----------|
+| GET  | /hello | Endpoint de teste |
+| GET  | /health | Health check |
+
+---
+
+## ▶️ Rodando localmente (sem Docker)
+
+### Pré-requisitos
+- Java 21
+- Maven
+
+```bash
 ./mvnw quarkus:dev
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+Acesse:
+- http://localhost:8080/hello
+- http://localhost:8080/health
 
-## Packaging and running the application
+---
 
-The application can be packaged using:
+## 🧪 Rodando os testes
 
-```shell script
-./mvnw package
+```bash
+./mvnw test
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+---
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+## 🐳 Rodando com Docker
 
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
+### Build da imagem
+```bash
+docker build -t quarkus-portfolio .
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./mvnw package -Dnative
+### Executar container
+```bash
+docker run --rm -p 8080:8080 quarkus-portfolio
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+---
 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
+## 🤖 CI/CD
 
-You can then execute your native executable with: `./target/quarkus-portfolio-1.0.0-SNAPSHOT-runner`
+O projeto utiliza **GitHub Actions** para:
 
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
+- Executar testes automaticamente
+- Validar build com Maven
+- Buildar imagem Docker em ambiente Linux
+- Garantir que a branch `main` permaneça estável
 
-## Provided Code
+O pipeline roda em:
+- `push` na `main`
+- `pull_request` para `main`
 
-### REST
+---
 
-Easily start your REST Web Services
+## 📦 Imagem Docker
 
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+A aplicação é empacotada usando **Docker multi-stage build**, garantindo:
+- Imagem final menor
+- Build reproduzível
+- Pronto para ambientes cloud e Kubernetes
+
+---
+
+## 🚀 Próximos passos (roadmap)
+
+- [ ] Publicação automática da imagem no GHCR
+- [ ] Manifestos Kubernetes (Deployment + Service)
+- [ ] Health probes (liveness/readiness)
+- [ ] ConfigMaps e Secrets
+- [ ] Deploy em cluster local (kind ou k3d)
+- [ ] Observabilidade básica
+
+---
+
+## 👩‍💻 Autora
+
+**Maria**  
+Projeto de estudo com foco em **engenharia de software, CI/CD e cloud-native**.
+
+---
+
+## 📝 Observações
+
+Este repositório foi construído de forma **incremental**, priorizando:
+- base sólida
+- automação desde o início
+- aprendizado prático com erros reais de CI/CD  
