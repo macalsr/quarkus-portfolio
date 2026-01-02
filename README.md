@@ -1,4 +1,7 @@
-# quarkus-portfolio
+# Quarkus Portfolio
+
+[![CI](https://github.com/macalsr/quarkus-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/macalsr/quarkus-portfolio/actions/workflows/ci.yml)
+Projeto de estudo com Java 21, Quarkus e CI/CD.
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
